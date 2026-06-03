@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Equilíbrio Sustentável | Harmonia para o Futuro</title>
+    <!-- Font Awesome 6 (ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: inter para legibilidade -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.25s ease;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== REGRA 60-30-10 ===== */
+        /* Fundo principal (60% da percepção visual) = Areia Iluminada #F4F6F6 (claro) 
+           No modo escuro, adaptamos mantendo a coerência com Florestal Escuro como tom dominante */
+        :root {
+            /* Modo claro (padrão) */
+            --bg-primary: #F4F6F6;      /* 60% - Areia Iluminada */
+            --surface-card: #FFFFFF;     /* cards e áreas elevadas */
+            --text-primary: #1E3A2F;     /* Florestal Escuro para textos principais */
+            --text-secondary: #2C3E2F;
+            --accent-main: #2ECC71;      /* Verde Broto (principal/CTAs) 10% de destaque */
+            --accent-secondary: #E67E22; /* Laranja Solar (detalhes, secundários) */
+            --accent-tertiary: #3498DB;  /* Azul Oceano (links/ícones) */
+            --border-light: #D5DBDB;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --card-bg: #FFFFFF;
+            --nav-bg: rgba(244, 246, 246, 0.92);
+        }
+
+        body.dark {
+            --bg-primary: #121E18;        /* fundo escuro inspirado na floresta */
+            --surface-card: #1E2A24;
+            --text-primary: #EDF2E7;      /* text claro com leve tom terroso */
+            --text-secondary: #C7D9C5;
+            --accent-main: #2ECC71;        /* mantém verde vibrante para contraste */
+            --accent-secondary: #F39C12;    /* laranja solar mais quente */
+            --accent-tertiary: #5DADE2;     /* azul oceano mais claro */
+            --border-light: #2F4B3C;
+            --card-bg: #1E2E26;
+            --nav-bg: rgba(18, 30, 24, 0.94);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* container principal */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        /* ===== HEADER com tema toggle ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-main);
+        }
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-main) 0%, var(--accent-secondary) 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .theme-toggle {
+            background: var(--surface-card);
+            border: 1px solid var(--border-light);
+            border-radius: 60px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            gap: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--accent-secondary);
+            transition: transform 0.2s;
+        }
+        .theme-toggle span {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .theme-toggle:hover {
+            transform: scale(0.97);
+            background: var(--accent-main);
+            color: #1E3A2F;
+        }
+        .theme-toggle:hover i, .theme-toggle:hover span {
+            color: #1E3A2F;
+        }
+
+        /* ===== Abas (tabs) ===== */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0 1.5rem;
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 0.5rem;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.25s;
+            color: var(--text-secondary);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tab-btn i {
+            font-size: 1.2rem;
+            color: var(--accent-tertiary);
+        }
+        .tab-btn.active {
+            background: var(--accent-main);
+            color: #1E3A2F;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+        .tab-btn.active i {
+            color: #1E3A2F;
+        }
+        .tab-btn:hover:not(.active) {
+            background: var(--surface-card);
+            color: var(--accent-main);
+            border: 1px solid var(--accent-main);
+        }
+
+        /* ===== painéis de conteúdo ===== */
+        .tab-pane {
+            display: none;
+            animation: fadeSlideUp 0.45s ease forwards;
+        }
+        .tab-pane.active-pane {
+            display: block;
+        }
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* cards / conteúdo rico */
+        .card {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .info-icon {
+            font-size: 2.2rem;
+            background: rgba(46, 204, 113, 0.15);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            color: var(--accent-main);
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: var(--text-primary);
+        }
+        p {
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .highlight {
+            color: var(--accent-main);
+            font-weight: 600;
+        }
+        .btn-secondary {
+            display: inline-block;
+            background: var(--accent-secondary);
+            color: #1E2A1F;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+            border: none;
+            cursor: default;
+            font-size: 0.9rem;
+        }
+        .future-badge {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 1rem;
+            border-left: 6px solid var(--accent-tertiary);
+            border-radius: 1rem;
+        }
+
+        /* animação de contraste animado (pisca suave nos elementos de destaque) */
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 0px rgba(46, 204, 113, 0); box-shadow: 0 0 0px rgba(46,204,113,0);}
+            50% { text-shadow: 0 0 4px rgba(46, 204, 113, 0.5); box-shadow: 0 2px 12px rgba(46,204,113,0.3);}
+            100% { text-shadow: 0 0 0px rgba(46, 204, 113, 0); box-shadow: 0 0 0px rgba(46,204,113,0);}
+        }
+        .animated-contrast {
+            animation: softGlow 2.2s infinite ease-in-out;
+        }
+        .accent-text {
+            color: var(--accent-main);
+            font-weight: 700;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
+            }
+            .tab-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <h1><i class="fas fa-seedling" style="color: #2ECC71;"></i> Equilíbrio Sustentável</h1>
+                <p>Harmonia entre pessoas, planeta e prosperidade</p>
+            </div>
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun"></i>
+                <span>Modo Claro</span>
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+
+        <!-- Abas (3 principais) -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="importancia"><i class="fas fa-heart"></i> Importância</button>
+            <button class="tab-btn" data-tab="porquefazer"><i class="fas fa-leaf"></i> Por que fazer?</button>
+            <button class="tab-btn" data-tab="futuro"><i class="fas fa-chart-line"></i> Bem para o Futuro</button>
+        </div>
+
+        <!-- Painel 1: Importância -->
+        <div id="importancia" class="tab-pane active-pane">
+            <div class="card">
+                <div class="info-icon"><i class="fas fa-globe-americas"></i></div>
+                <h2>🌱 Por que o Equilíbrio Sustentável é <span class="accent-text animated-contrast">essencial</span>?</h2>
+                <p>O equilíbrio sustentável é a base para garantir que as próximas gerações possam desfrutar de um planeta saudável. Ele integra <strong class="highlight">economia, sociedade e meio ambiente</strong>, evitando o esgotamento dos recursos naturais. Sem ele, o crescimento desenfreado leva à escassez de água, poluição do ar e perda de biodiversidade.</p>
+                <div class="grid-2">
+                    <div class="future-badge">
+                        <i class="fas fa-tint" style="color: #3498DB; font-size: 1.8rem;"></i>
+                        <h3>Clima Estável</h3>
+                        <p>Ações sustentáveis regulam as emissões de carbono, reduzindo eventos climáticos extremos e protegendo populações vulneráveis.</p>
+                    </div>
+                    <div class="future-badge">
+                        <i class="fas fa-hand-holding-heart" style="color: #E67E22; font-size: 1.8rem;"></i>
+                        <h3>Justiça Social</h3>
+                        <p>Distribuição justa de recursos, trabalho decente e acesso à educação ambiental geram igualdade e qualidade de vida.</p>
+                    </div>
+                </div>
+                <p><i class="fas fa-chart-simple"></i> Dados da ONU indicam que adotar práticas sustentáveis pode reduzir em até 70% a pegada ecológica urbana. Mais que uma tendência, é uma necessidade urgente para a sobrevivência da humanidade.</p>
+                <div style="margin-top: 1rem;"><span class="btn-secondary"><i class="far fa-clock"></i> Emergência climática exige ação coletiva</span></div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-recycle"></i> Impacto no bem-estar humano</h3>
+                <p>Ambientes equilibrados reduzem o estresse, melhoram a saúde respiratória e promovem economia de energia. Cidades verdes com mobilidade limpa e áreas verdes aumentam a longevidade. O equilíbrio sustentável conecta pessoas à natureza, gerando propósito e resiliência.</p>
+            </div>
+        </div>
+
+        <!-- Painel 2: Por que fazer? (motivos práticos) -->
+        <div id="porquefazer" class="tab-pane">
+            <div class="card">
+                <div class="info-icon"><i class="fas fa-question-circle"></i></div>
+                <h2>💚 Por que <span class="accent-text animated-contrast">adotar</span> atitudes sustentáveis agora?</h2>
+                <p>Adotar práticas sustentáveis não é apenas "salvar o planeta", mas também <strong>benefício direto para cada pessoa e comunidade</strong>. Reduzimos desperdícios, economizamos recursos financeiros e criamos ambientes mais agradáveis.</p>
+                <div class="grid-2">
+                    <div>
+                        <i class="fas fa-solar-panel" style="color: #E67E22; font-size: 2rem;"></i>
+                        <h3>Redução de custos</h3>
+                        <p>Energia solar, reuso de água e consumo consciente diminuem contas domésticas e empresariais. Um ganho real a curto prazo.</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-tree" style="color: #2ECC71; font-size: 2rem;"></i>
+                        <h3>Saúde coletiva</h3>
+                        <p>Menos poluição significa menos doenças respiratórias e alergias. Agricultura sustentável gera alimentos mais nutritivos e livres de agrotóxicos.</p>
+                    </div>
+                </div>
+                <p><i class="fas fa-charging-station"></i> Além disso, governos e empresas estão valorizando selos verdes: produtos e marcas que investem em sustentabilidade conquistam mais consumidores e incentivos fiscais.</p>
+                <div class="future-badge" style="margin-top: 1rem;">
+                    <i class="fas fa-users"></i> <strong>Legado positivo:</strong> cada escolha sustentável hoje inspira comunidades e molda uma cultura regenerativa.
+                </div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-hand-sparkles"></i> Pequenas ações, grandes transformações</h3>
+                <p>Separar resíduos recicláveis, optar por transportes de baixo carbono, plantar árvores urbanas e apoiar economia circular são exemplos tangíveis de equilíbrio. <span class="highlight">Quando cada um faz sua parte, o efeito sistêmico é gigantesco.</span></p>
+            </div>
+        </div>
+
+        <!-- Painel 3: Bem para o Futuro -->
+        <div id="futuro" class="tab-pane">
+            <div class="card">
+                <div class="info-icon"><i class="fas fa-seedling"></i></div>
+                <h2>🔮 O que o equilíbrio sustentável promete para as <span class="accent-text animated-contrast">próximas décadas</span>?</h2>
+                <p>Investir em sustentabilidade é plantar esperança. As projeções mostram que se alcançarmos as metas do Acordo de Paris e os ODS (Objetivos de Desenvolvimento Sustentável), poderemos viver em um mundo com energias renováveis, cidades neutras em carbono e tecnologias de restauração ecológica.</p>
+                <div class="grid-2">
+                    <div class="future-badge">
+                        <i class="fas fa-smile-beam" style="color:#E67E22;"></i>
+                        <h3>Gerações abundantes</h3>
+                        <p>Crianças e jovens herdarão um planeta com ar limpo, florestas em recuperação e mares repletos de vida. Mais bem-estar psicológico e comunidades resilientes.</p>
+                    </div>
+                    <div class="future-badge">
+                        <i class="fas fa-microchip" style="color:#3498DB;"></i>
+                        <h3>Inovação verde</h3>
+                        <p>Materiais biodegradáveis, agricultura regenerativa, veículos elétricos acessíveis e captura de carbono serão cotidianos, gerando milhões de empregos verdes.</p>
+                    </div>
+                </div>
+                <p><i class="fas fa-chart-line"></i> Segundo o Fórum Econômico Mundial, a economia sustentável pode adicionar US$ 12 trilhões até 2030. Um futuro próspero e inclusivo depende das escolhas feitas hoje.</p>
+                <div class="btn-secondary" style="cursor:default"><i class="fas fa-calendar-check"></i> 2050: horizonte da neutralidade climática</div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-dove"></i> Paz com o planeta e entre as nações</h3>
+                <p>O equilíbrio sustentável reduz conflitos por água, alimentos e energia. Países que cooperam em tecnologias limpas fortalecem relações pacíficas. O bem-estar futuro está intrinsecamente ligado à consciência ecológica coletiva.</p>
+                <p style="margin-top: 1rem;"><i class="fas fa-quote-left"></i> “A maior ameaça ao nosso planeta é acreditar que outra pessoa o salvará.” — Robert Swan. <strong>Seja protagonista desse futuro.</strong></p>
+            </div>
+        </div>
+
+        <footer>
+            <p><i class="fas fa-leaf" style="color: #2ECC71;"></i> Equilíbrio Sustentável — cada ação conta. Inspire e transforme. <i class="fas fa-recycle" style="color: #E67E22;"></i></p>
+            <p style="margin-top: 0.5rem;">🌍 60% areia iluminada • 30% florestal escuro • 10% verde broto e detalhes em laranja solar/azul oceano</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sistema de abas (tabs)
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const panes = {
+            importancia: document.getElementById('importancia'),
+            porquefazer: document.getElementById('porquefazer'),
+            futuro: document.getElementById('futuro')
+        };
+
+        function activateTab(tabId) {
+            // Remove active de todos os botões e painéis
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            Object.values(panes).forEach(pane => {
+                if(pane) pane.classList.remove('active-pane');
+            });
+            // Ativa o painel correto
+            if(panes[tabId]) panes[tabId].classList.add('active-pane');
+            // Ativa o botão correspondente
+            const activeBtn = Array.from(tabBtns).find(btn => btn.dataset.tab === tabId);
+            if(activeBtn) activeBtn.classList.add('active');
+        }
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                if(tabId === 'importancia') activateTab('importancia');
+                else if(tabId === 'porquefazer') activateTab('porquefazer');
+                else if(tabId === 'futuro') activateTab('futuro');
+            });
+        });
+
+        // Tema Escuro / Claro (toggle) com persistência localstorage + regras de cor 60-30-10 aplicadas
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        // verifica preferência salva ou sistema
+        const savedTheme = localStorage.getItem('theme');
+        if(savedTheme === 'dark') {
+            body.classList.add('dark');
+            updateToggleUI(true);
+        } else if(savedTheme === 'light') {
+            body.classList.remove('dark');
+            updateToggleUI(false);
+        } else {
+            // checa preferência do sistema
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if(prefersDark) {
+                body.classList.add('dark');
+                updateToggleUI(true);
+            } else {
+                updateToggleUI(false);
+            }
+        }
+
+        function updateToggleUI(isDark) {
+            const span = themeToggle.querySelector('span');
+            if(isDark) {
+                span.textContent = 'Modo Escuro';
+                // pequeno detalhe: ícone lua destacado
+                themeToggle.querySelector('.fa-moon').style.color = '#F39C12';
+                themeToggle.querySelector('.fa-sun').style.color = '#E67E22';
+            } else {
+                span.textContent = 'Modo Claro';
+                themeToggle.querySelector('.fa-sun').style.color = '#E67E22';
+                themeToggle.querySelector('.fa-moon').style.color = 'var(--text-secondary)';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark');
+            if(isDark) {
+                body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateToggleUI(false);
+            } else {
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateToggleUI(true);
+            }
+            // reaplica pequeno ajuste para garantir contraste animado não quebrar
+            document.querySelectorAll('.animated-contrast').forEach(el => {
+                el.style.animation = 'none';
+                setTimeout(() => el.style.animation = 'softGlow 2.2s infinite ease-in-out', 10);
+            });
+        });
+
+        // Animação de contraste garantida nos elementos (já existem as classes .animated-contrast) 
+        // Caso queira dar refresh na animação ao mudar tema, já resolvido acima.
+        // Adicionamos também um efeito sutil de destaque ao carregar na primeira vez.
+        window.addEventListener('load', () => {
+            // pequeno efeito extra: título pulsante suave após 1s
+            const firstAccent = document.querySelector('.animated-contrast');
+            if(firstAccent) {
+                firstAccent.style.animation = 'softGlow 2.2s infinite ease-in-out';
+            }
+            // Adiciona sombra animada em botão ativo por um momento (opcional)
+            const activeTab = document.querySelector('.tab-btn.active');
+            if(activeTab) {
+                activeTab.style.transition = 'box-shadow 0.2s';
+                setTimeout(() => { activeTab.style.boxShadow = ''; }, 800);
+            }
+        });
+
+        // Expande regra 60-30-10: O background é 60% (Areia Iluminada ou variante dark), 
+        // os textos principais e títulos são Florestal Escuro (30%), os detalhes/CTA são verde broto + laranja solar + azul oceano (10%)
+        // Isso está aplicado no CSS via variáveis e nas cores de botões, ícones e destaques.
+        // Adicionando micro interação para deixar ainda mais suave e respeitar cores secundárias.
+        const style = document.createElement('style');
+        style.textContent = `
+            .tab-btn.active {
+                background: var(--accent-main) !important;
+                color: #1E3A2F !important;
+            }
+            .btn-secondary {
+                background: var(--accent-secondary);
+                color: #1E2A1F;
+            }
+            .theme-toggle:hover {
+                background: var(--accent-main);
+            }
+            a, i[class*="fa-"] {
+                transition: color 0.2s;
+            }
+            i.fa-seedling, i.fa-leaf, i.fa-recycle {
+                color: var(--accent-main);
+            }
+            .card .info-icon i {
+                color: var(--accent-main);
+            }
+            .future-badge i {
+                color: var(--accent-tertiary);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
